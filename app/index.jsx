@@ -1,15 +1,15 @@
 import { Link, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../constants";
 import CustomButtom from "../components/CustomButtom";
 
 export default function App() {
   return (
-    <SafeAreaView className="sbg-gradient-cards h-full">
+    <SafeAreaView className="bg-back h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
-        <View className="w-full h-full relative justify-center px-4">
+        <View className="w-full min-h-[95vh] relative justify-center px-4">
           <Text className="absolute top-0 left-4 text-2xl font-poppins-bold">
             Aura
           </Text>
@@ -26,9 +26,9 @@ export default function App() {
             Exploration with Aura
           </Text>
           <CustomButtom
-            title="Get Started"
+            title="Continue with Email"
             handlePress={() => router.push("signin")}
-            containerStyle="w-full rounded-full mt-12"
+            containerStyle="w-full bg-primary text-sm rounded-full mt-12"
           />
         </View>
       </ScrollView>
