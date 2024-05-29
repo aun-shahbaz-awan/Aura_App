@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import { PoppinsFont } from "../constants/fonts";
+import { GlobalProvider } from "../context/GlobalProvider";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -17,10 +18,12 @@ const RouteLayout = () => {
   if (!fontsLoaded && !error)
     return <Text className="text-3xl font">Loading!</Text>;
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-    </Stack>
+    <GlobalProvider>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      </Stack>
+    </GlobalProvider>
   );
 };
 

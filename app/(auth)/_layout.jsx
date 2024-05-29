@@ -1,8 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Stack } from "expo-router";
+import { Redirect, Stack } from "expo-router";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const AuthLayout = () => {
+  const { loading, isLogin } = useGlobalContext();
+
+  if (!loading && isLogin) <Redirect href="/home" />;
   return (
     <Stack>
       <Stack.Screen name="signin" options={{ headerShown: false }} />

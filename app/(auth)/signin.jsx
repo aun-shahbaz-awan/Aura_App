@@ -1,12 +1,32 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, Alert } from "react-native";
 import React, { useState } from "react";
 import { Link } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import InputField from "../../components/InputField";
 import CustomButtom from "../../components/CustomButtom";
+import { login } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
+  const { setLoading } = useGlobalContext();
   const [formInput, setFormInput] = useState({ email: "", password: "" });
+
+  const handleSignIn = async () => {
+    if (!formInput.email || !formInput.password) {
+      Alert.alert("please Fill all the fields to proceed!");
+      return;
+    }
+    setLoading(true);
+    try {
+      const result = await login(formInput.email, formInput.password);
+      console.log("Register Result:", result);
+      router.replace("/home");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <SafeAreaView className="bg-back h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
@@ -44,7 +64,7 @@ const SignIn = () => {
             title="Sign In"
             containerStyle="bg-primary rounded-full mt-4"
             textStyle=" text-base"
-            handlePress={() => {}}
+            handlePress={handleSignIn}
           />
           <Text className="text-sm text-center items-center font-poppins-medium pr-1 mt-3">
             Don't have an account?{" "}
