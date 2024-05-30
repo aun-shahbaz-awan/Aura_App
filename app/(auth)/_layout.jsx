@@ -4,8 +4,8 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 
 const AuthLayout = () => {
   const { loading, isLogin } = useGlobalContext();
+  if (!loading && isLogin) return <Redirect href="/home" />;
 
-  if (!loading && isLogin) <Redirect href="/home" />;
   return (
     <Stack>
       <Stack.Screen name="signin" options={{ headerShown: false }} />

@@ -6,11 +6,17 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 const TabLayout = () => {
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: "blue" }}>
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: "blue",
+        headerShown: false,
+      }}
+    >
       <Tabs.Screen
         name="home"
         options={{
           title: "Home",
+
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="home" size={28} color={color} />
           ),
@@ -20,6 +26,7 @@ const TabLayout = () => {
         name="create"
         options={{
           title: "profile",
+
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="add-circle" size={28} color={color} />
           ),
@@ -29,6 +36,7 @@ const TabLayout = () => {
         name="profile"
         options={{
           title: "Profile",
+
           tabBarIcon: ({ color }) => (
             <FontAwesome name="user" size={28} color={color} />
           ),
