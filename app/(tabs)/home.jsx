@@ -4,44 +4,29 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import InputField from "../../components/InputField";
 import TrendingVideos from "../../components/tabs/TrendingVideos";
-import { getPosts } from "../../lib/appwrite";
-import AllVideos from "../../components/tabs/AllVideos";
+import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
 import VideoCard from "../../components/tabs/VideoCard";
+import { useAppwrite } from "../../lib/useAppwrite";
 
 const Home = () => {
   const { loggedInUser } = useGlobalContext();
-  const [posts, setPosts] = useState([]);
+  const { data: posts, refetch } = useAppwrite(getAllPosts);
+  const { data: trending } = useAppwrite(getLatestPosts);
   const [searchText, setSearchText] = useState("");
-  const [loading, setLoading] = useState(false);
-  console.log("Login In:", loggedInUser);
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const result = await getPosts();
-        setPosts(result);
-      } catch (error) {
-        Alert.alert("Error", error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-  console.log("posts:", posts);
+
   return (
     <SafeAreaView className="bg-back h-full">
       <FlatList
         data={posts}
-        className="px-4 my-6"
+        className="px-4 my-6 h-[100vh]"
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
           <VideoCard
             title={item.title}
             thumbnail={item.thumbnail}
             video={item.video}
-            creator={item.username}
-            avatar={item.avatar}
+            // creator={item.users.username}
+            avatar={item.users.avatar}
           />
         )}
         ListHeaderComponent={() => (
@@ -62,7 +47,7 @@ const Home = () => {
             <Text className="font-poppins-medium mt-6 text-black/70 ml-px">
               Trending Videos
             </Text>
-            <TrendingVideos posts={posts} />
+            <TrendingVideos posts={trending} />
           </View>
         )}
         ListEmptyComponent={() => (

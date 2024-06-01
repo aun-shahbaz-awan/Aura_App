@@ -6,7 +6,6 @@ const TrendingVideos = ({ posts }) => {
   return (
     <FlatList
       data={posts}
-      //   data={[]}
       keyExtractor={(item) => item.$id}
       renderItem={({ item }) => (
         <Text className="bg-black/10 py-20 mx-10 mb-6 mt-4 px-20">

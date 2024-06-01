@@ -16,7 +16,6 @@ const TabLayout = () => {
         name="home"
         options={{
           title: "Home",
-
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="home" size={28} color={color} />
           ),
@@ -26,7 +25,6 @@ const TabLayout = () => {
         name="create"
         options={{
           title: "profile",
-
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="add-circle" size={28} color={color} />
           ),
@@ -36,7 +34,6 @@ const TabLayout = () => {
         name="profile"
         options={{
           title: "Profile",
-
           tabBarIcon: ({ color }) => (
             <FontAwesome name="user" size={28} color={color} />
           ),
