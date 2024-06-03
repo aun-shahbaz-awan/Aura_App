@@ -1,5 +1,5 @@
-import { View, Text, ScrollView, Alert, FlatList } from "react-native";
-import React, { useEffect, useState } from "react";
+import { View, Text, FlatList } from "react-native";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import InputField from "../../components/InputField";
