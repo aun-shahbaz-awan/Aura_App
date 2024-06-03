@@ -14,6 +14,12 @@ const Home = () => {
   const { data: trending } = useAppwrite(getLatestPosts);
   const [searchText, setSearchText] = useState("");
 
+  // const filteredPosts = posts.filter((post) =>
+  //   Object.values(post).some((val) =>
+  //     String(val).toLowerCase().includes(searchText.toLowerCase())
+  //   )
+  // );
+
   return (
     <SafeAreaView className="bg-back h-full">
       <FlatList
@@ -35,7 +41,6 @@ const Home = () => {
             <Text className="text-2xl font-poppins-medium ml-px">
               {loggedInUser.username}
             </Text>
-
             <InputField
               type="email"
               value={searchText}

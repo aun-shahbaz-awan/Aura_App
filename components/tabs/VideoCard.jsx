@@ -1,17 +1,41 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import React from "react";
+import React, { useState } from "react";
+import { ResizeMode, Video } from "expo-av";
+import images from "../../constants/images";
 
 const VideoCard = ({ title, thumbnail, video, avatar }) => {
+  const [played, setPlayed] = useState(false);
   return (
     <View className="mb-5 w-full">
-      <TouchableOpacity activeOpacity={0.7} onPress={() => {}}>
-        <Image
-          source={{ uri: thumbnail }}
+      {played ? (
+        <Video
           className="w-full max-w-[360px] h-48 border border-black/10 bg-black/40 shadow-lg mx-auto rounded-xl"
-          resizeMode="cover"
+          source={{
+            uri: "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+          }}
+          useNativeControls
+          resizeMode={ResizeMode.CONTAIN}
+          isLooping
         />
-      </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={() => setPlayed(!played)}
+          className="flex items-center justify-center"
+        >
+          <Image
+            source={{ uri: thumbnail }}
+            className="w-full max-w-[360px] h-48 border border-black/10 bg-black/40 shadow-lg mx-auto rounded-xl"
+            resizeMode="cover"
+          />
+          <Image
+            source={images.play}
+            className="absolute w-12 h-12 overflow-hidden drop-shadow-lg opacity-90"
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+      )}
+
       <View className="mt-3 flex flex-1 flex-row items-start">
         <Image
           source={{ uri: avatar }}
